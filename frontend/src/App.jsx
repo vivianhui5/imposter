@@ -109,23 +109,34 @@ function App() {
           <div className="screen">
             <div className="logo">IMPOSTER</div>
 
-            <div className="input-group">
-              <label className="input-label" htmlFor="player-count">
-                how many players?
-              </label>
-              <input
-                id="player-count"
-                type="number"
-                min="3"
-                max="20"
-                value={totalPlayers}
-                onChange={(e) => {
-                  setTotalPlayers(parseInt(e.target.value) || 3)
-                  setError('')
-                }}
-                className="input-field"
-              />
-            </div>
+          <div className="input-group">
+            <label className="input-label" htmlFor="player-count">
+              how many players?
+            </label>
+            <input
+              id="player-count"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={totalPlayers}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^0-9]/g, '')
+                if (value === '') {
+                  setTotalPlayers('')
+                } else {
+                  setTotalPlayers(parseInt(value))
+                }
+                setError('')
+              }}
+              onBlur={(e) => {
+                if (e.target.value === '' || parseInt(e.target.value) < 3) {
+                  setTotalPlayers(3)
+                }
+              }}
+              placeholder="3-20"
+              className="input-field"
+            />
+          </div>
 
             {error && <div className="error-message">{error}</div>}
 
