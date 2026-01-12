@@ -1,0 +1,229 @@
+Imposter Party Game — Web App Specification
+=========================================
+
+1. Overview
+-----------
+Product Name: Imposter  
+Platform: Mobile web app (mobile-first)  
+Primary Device Target: iPhone (portrait)
+
+Purpose:
+A simple party game used to secretly distribute roles. One phone is passed
+around the group. One player is the Imposter; all others see the same word.
+
+Words MUST be generated randomly from a centralized word library via a backend
+(API-based). No local static word list.
+
+
+2. Target Device & Layout
+------------------------
+Design size: 390 × 844 px (iPhone 14/15 portrait)
+Orientation: Portrait only
+Mobile-first, touch-first UI
+Responsive for other phones but optimized for iPhone
+
+
+3. Game Rules / Logic
+--------------------
+1. User enters number of players (N)
+2. App requests a random word from backend
+3. App randomly selects ONE imposter index from [1..N]
+4. For each player:
+   - Player taps "Reveal Word"
+   - Player sees:
+       - The word (normal player), OR
+       - "You are the Imposter"
+   - Player taps "Next Player"
+   - Phone is passed to the next person
+5. After Player N, setup is complete
+
+Backend is only used for word generation.
+No authentication, no persistence, no scoring.
+
+
+4. Screens & Flow
+-----------------
+
+SCREEN 1 — Home / Setup
+----------------------
+Elements:
+- App logo / title (centered)
+- Subtitle (optional): "A party game of deception"
+- Number input:
+    Label: "Number of Players"
+    Type: number
+    Min: 3
+    Max: 20
+- Primary button: "Start Game"
+
+Behavior:
+- Validate integer >= 3
+- Call backend to fetch random word
+- Generate imposter index
+- Go to Player 1 screen
+
+
+SCREEN 2 — Player Turn (Pre-Reveal)
+----------------------------------
+Elements:
+- Header: "Player X"
+- Instruction text:
+  "When you’re ready, tap to reveal your word."
+- Large primary button: "Reveal Word"
+- Optional warning text:
+  "Make sure no one else is looking 👀"
+
+
+SCREEN 3 — Player Reveal
+-----------------------
+
+Normal Player:
+- Header: "Your Word"
+- Large centered word
+- Instruction: "Remember your word."
+- Button: "Next Player →"
+
+Imposter:
+- Header: "You are the…"
+- Large text: "IMPOSTER"
+- Subtext: "Blend in. Don’t get caught."
+- Button: "Next Player →"
+
+
+SCREEN 4 — Pass Phone (Optional)
+-------------------------------
+- Text: "Pass the phone to the next player."
+- Button: "Ready"
+
+Leads to next player’s pre-reveal screen
+
+
+SCREEN 5 — End / Ready
+----------------------
+- Text: "All roles assigned!"
+- Subtext: "Start discussing 🎉"
+- Button: "New Game"
+
+
+5. State Management
+-------------------
+Client-side Game State:
+
+GameState {
+  totalPlayers: number
+  currentPlayerIndex: number
+  imposterIndex: number
+  selectedWord: string
+}
+
+Rules:
+- imposterIndex is random from 1..totalPlayers
+- selectedWord is fetched ONCE per game
+- Word never changes mid-game
+- State resets on "New Game"
+
+
+6. Backend Word Service
+----------------------
+
+Purpose:
+Provide a random word from a curated library.
+
+API Endpoint:
+GET /api/random-word
+
+Response:
+{
+  "word": "Airport"
+}
+
+Backend Requirements:
+- Word list stored server-side
+- Random selection per request
+- No authentication
+- No user tracking
+- Extremely low latency
+
+Optional Extensions (NOT required for MVP):
+- Categories (places, objects, food)
+- Difficulty levels
+- Custom word submissions (future)
+
+
+7. Visual Design
+----------------
+Style:
+- Cute, clean party-game aesthetic
+- Bright but soft colors
+- Rounded corners everywhere
+- Minimal text per screen
+
+Typography:
+- Single rounded sans-serif font
+  (Inter, Poppins, or system font)
+
+Buttons:
+- Minimum height: 48px
+- Large rounded corners (16–24px radius)
+- One primary action per screen
+
+
+8. CSS / Layout Guidelines
+--------------------------
+- Center content vertically using Flexbox
+- Max-width container:
+  max-width: 390px;
+  margin: 0 auto;
+
+- Padding:
+  padding: 24px;
+
+- Disable text selection:
+  user-select: none;
+
+
+9. Technical Constraints
+------------------------
+- Backend required ONLY for word generation
+- No accounts
+- No ads
+- No analytics
+- No persistent storage
+- Frontend must still function gracefully if API fails
+  (show error + retry)
+
+
+10. Suggested Architecture
+--------------------------
+Frontend:
+- HTML / CSS / JavaScript OR React
+
+Backend:
+- Simple REST API
+- Node.js / serverless function acceptable
+- Stateless
+
+Deployment:
+- Frontend: Vercel / Netlify
+- Backend: Serverless function or lightweight API
+
+
+11. Explicit Non-Goals
+---------------------
+- Voting
+- Timers
+- Scoring
+- Multiplayer syncing
+- Chat
+- Game moderation logic
+
+This app ONLY distributes roles.
+
+
+12. Success Criteria
+-------------------
+- Game starts in under 10 seconds
+- Backend word fetch < 300ms
+- Fully usable one-handed
+- No accidental reveals
+- Feels fun and polished immediately
