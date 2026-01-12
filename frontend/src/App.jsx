@@ -202,16 +202,14 @@ function App() {
             <button className="modal-close" onClick={() => setShowModal(false)}>×</button>
             <h2>how to play</h2>
             <div className="modal-content">
-              <p>• enter the number of players</p>
-              <p>• pass the phone and reveal your role</p>
-              <p className="indent">- one player is the imposter</p>
-              <p className="indent">- everyone else gets the same word</p>
-              <p>• go around in a circle twice (start with player 1)</p>
-              <p>• everyone says one word related to the secret</p>
-              <p className="indent">- regular players: hint at the word but don't be too obvious</p>
-              <p className="indent">- imposter: try to blend in and figure out the word</p>
-              <p className="indent">- if imposter says the actual word, they lose</p>
-              <p>• vote on who the imposter is</p>
+              <p>• pass phone, everyone reveals their role</p>
+              <p>• one random player is the imposter</p>
+              <p>• everyone else gets the same word</p>
+              <p>• go in a circle twice say one related word</p>
+              <p className="indent">- regular players: don't be obvious</p>
+              <p className="indent">- imposter: blend in, figure out the word</p>
+              <p className="indent">- if imposter says the exact word, they lose</p>
+              <p>• vote on who's the imposter</p>
             </div>
           </div>
         </div>
