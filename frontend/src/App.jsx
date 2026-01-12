@@ -26,7 +26,8 @@ function App() {
     setError('')
     
     try {
-      const response = await fetch('/api/random-word')
+      const apiUrl = import.meta.env.VITE_API_URL || '/api/random-word'
+      const response = await fetch(apiUrl)
       
       if (!response.ok) {
         throw new Error('Failed to fetch word from server')
