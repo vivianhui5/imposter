@@ -203,8 +203,8 @@ function App() {
             <h2>how to play</h2>
             <div className="modal-content">
               <p>• pass the phone around to see your role</p>
-              <p className="indent"> one random player is the imposter</p>
-              <p className="indent"> everyone else gets the same word</p>
+              <p className="indent">- one random player is the imposter</p>
+              <p className="indent">- everyone else gets the same word</p>
               <p>• go in a circle twice and say one word </p>
               <p className="indent">- regular players: say an adjacent word, but don't be obvious</p>
               <p className="indent">- imposter: blend in and try to figure out the word</p>
