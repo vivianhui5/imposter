@@ -1,140 +1,22 @@
-# Imposter Party Game 🎮
+# imposter
 
-A mobile-first web app for secretly distributing roles in a party game. One player is the Imposter; all others see the same word.
+a party game where one person is secretly the imposter.
 
-## Features
+## how to play
 
-- 🎲 Random word generation from backend API
-- 📱 Mobile-first design (optimized for iPhone)
-- 🎨 Cute, modern UI with smooth animations
-- 🔒 Privacy-focused (no accounts, no tracking)
-- ⚡ Fast and simple to use
+1. pass your phone around
+2. everyone taps "reveal" to see their role
+3. one person gets "imposter" — everyone else gets the same word
+4. go in a circle twice, each person says one related word
+5. regular players: hint at the word but don't be obvious
+6. imposter: try to blend in and figure out the word
+7. if the imposter says the actual word, they lose
+8. vote on who's the imposter
 
-## Tech Stack
+## play now
 
-**Frontend:**
-- React 18
-- Vite
-- CSS3 with custom properties
-
-**Backend:**
-- Node.js
-- Express
-- CORS-enabled REST API
-
-## Installation
-
-1. **Install all dependencies:**
-   ```bash
-   npm run install:all
-   ```
-
-   Or manually:
-   ```bash
-   npm install
-   cd backend && npm install
-   cd ../frontend && npm install
-   ```
-
-## Development
-
-**Run both frontend and backend concurrently:**
-```bash
-npm run dev
-```
-
-This will start:
-- Backend API on `http://localhost:3001`
-- Frontend dev server on `http://localhost:3000`
-
-**Or run them separately:**
-
-Backend only:
-```bash
-npm run dev:backend
-```
-
-Frontend only:
-```bash
-npm run dev:frontend
-```
-
-## How to Play
-
-1. Enter the number of players (3-20)
-2. Tap "Start Game"
-3. Pass the phone around
-4. Each player taps "Reveal Word" to see their role
-5. One random player will be the Imposter
-6. After all reveals, start discussing!
-
-## Project Structure
-
-```
-imposter/
-├── backend/
-│   ├── server.js          # Express API server
-│   ├── words.js           # Word library
-│   └── package.json
-├── frontend/
-│   ├── src/
-│   │   ├── App.jsx        # Main game component
-│   │   ├── main.jsx       # React entry point
-│   │   └── index.css      # Global styles
-│   ├── index.html
-│   ├── vite.config.js
-│   └── package.json
-├── specs.txt              # Full specification
-└── package.json           # Root package
-```
-
-## API Endpoints
-
-### GET `/api/random-word`
-Returns a random word from the curated library.
-
-**Response:**
-```json
-{
-  "word": "Airport"
-}
-```
-
-### GET `/api/health`
-Health check endpoint.
-
-**Response:**
-```json
-{
-  "status": "ok"
-}
-```
-
-## Design Specifications
-
-- **Target Device:** iPhone 14/15 (390 × 844 px)
-- **Orientation:** Portrait only
-- **Font:** Poppins (via Google Fonts)
-- **Color Scheme:** Soft pinks and corals
-- **Button Height:** Minimum 56px for touch targets
-- **Animations:** Smooth fade-ins and pop effects
-
-## Deployment
-
-**Frontend:**
-- Deploy to Vercel, Netlify, or similar
-- Build with: `npm run build` (from frontend directory)
-
-**Backend:**
-- Deploy as serverless function or to any Node.js host
-- Ensure CORS is properly configured
-- Set PORT environment variable if needed
-
-## License
-
-This project is for educational and personal use.
+https://imposter-orcin-nine.vercel.app/
 
 ---
 
-Built with ❤️ for fun party games!
-
+made by vivian
