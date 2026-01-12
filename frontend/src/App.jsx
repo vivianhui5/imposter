@@ -46,13 +46,13 @@ function App() {
 
   // Start new game
   const startGame = async () => {
-    if (totalPlayers < 3) {
-      setError('You need at least 3 players!')
+    if (!totalPlayers || totalPlayers < 3) {
+      setError('need at least 3 players')
       return
     }
     
     if (totalPlayers > 20) {
-      setError('Maximum 20 players!')
+      setError('max 20 players')
       return
     }
 
@@ -127,11 +127,6 @@ function App() {
                   setTotalPlayers(parseInt(value))
                 }
                 setError('')
-              }}
-              onBlur={(e) => {
-                if (e.target.value === '' || parseInt(e.target.value) < 3) {
-                  setTotalPlayers(3)
-                }
               }}
               placeholder="3-20"
               className="input-field"
